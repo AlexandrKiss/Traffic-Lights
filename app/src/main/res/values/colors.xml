@@ -8,11 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="gray">#F8F7F7</color>
-    <color name="LIGHT_GREENISH_BLUE">#55efc4</color>
+    <color name="gray">#EFEFEF</color>
+    <color name="dark_gray">#C6C6C6</color>
+    <color name="LIGHT_GREENISH_BLUE">#B1E1D4</color>
     <color name="MINT_LEAF">#00b894</color>
-    <color name="SOUR_LEMON">#ffeaa7</color>
+    <color name="SOUR_LEMON">#F8F0D6</color>
     <color name="BRIGHT_YARROW">#fdcb6e</color>
-    <color name="PINK_GLAMOUR">#ff7675</color>
+    <color name="PINK_GLAMOUR">#FBBBBB</color>
     <color name="CHI_GONG">#d63031</color>
 </resources>

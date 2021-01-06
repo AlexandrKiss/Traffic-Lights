@@ -6,86 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <LinearLayout
+        android:id="@+id/frameLayout"
         android:layout_width="120dp"
         android:layout_height="360dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/traffic_lights"
+        android:orientation="vertical"
+        android:elevation="@dimen/cardview_default_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:orientation="vertical">
+            android:layout_height="120dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
+            <View
+                android:id="@+id/rect_red_glow"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/rect_red_glow"
+                android:visibility="gone" />
 
-                <View
-                    android:id="@+id/rect_red_glow"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:visibility="gone"
-                    android:background="@drawable/rect_red_glow" />
+            <View
+                android:id="@+id/rect_red"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rect_red"
+                android:elevation="@dimen/cardview_compat_inset_shadow" />
+        </FrameLayout>
 
-                <View
-                    android:id="@+id/rect_red"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rect_red"
-                    android:elevation="@dimen/cardview_compat_inset_shadow" />
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
+            <View
+                android:id="@+id/rect_yellow_glow"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/rect_yellow_glow"
+                android:visibility="gone" />
 
-                <View
-                    android:id="@+id/rect_yellow_glow"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:visibility="gone"
-                    android:background="@drawable/rect_yellow_glow" />
+            <View
+                android:id="@+id/rect_yellow"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rect_yellow"
+                android:elevation="@dimen/cardview_compat_inset_shadow" />
+        </FrameLayout>
 
-                <View
-                    android:id="@+id/rect_yellow"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rect_yellow"
-                    android:elevation="@dimen/cardview_compat_inset_shadow" />
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
+            <View
+                android:id="@+id/rect_green_glow"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/rect_green_glow"
+                android:visibility="gone" />
 
-                <View
-                    android:id="@+id/rect_green_glow"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:visibility="gone"
-                    android:background="@drawable/rect_green_glow" />
-
-                <View
-                    android:id="@+id/rect_green"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rect_green"
-                    android:elevation="@dimen/cardview_compat_inset_shadow" />
-            </FrameLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            <View
+                android:id="@+id/rect_green"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rect_green"
+                android:elevation="@dimen/cardview_compat_inset_shadow" />
+        </FrameLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
@@ -95,5 +90,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

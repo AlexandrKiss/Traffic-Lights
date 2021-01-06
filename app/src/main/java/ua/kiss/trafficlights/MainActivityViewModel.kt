@@ -4,32 +4,49 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import ua.kiss.trafficlights.utils.Status
 
 class MainActivityViewModel : ViewModel() {
     val updateStatus: MutableLiveData<Status> by lazy { MutableLiveData<Status>() }
     private lateinit var coroutineScope: Job
+    var isVisibleDialog: Boolean = false
 
     fun onStart() {
-        coroutineScope = viewModelScope.launch {
-            while (true) {
-                updateStatus.postValue(Status.STOP)
-                delay(5000)
-                updateStatus.postValue(Status.ATTENTION)
-                delay(3000)
-                updateStatus.postValue(Status.START)
-                delay(5000)
-            }
-        }
+        if (!::coroutineScope.isInitialized)  changeOfStatus()
+        else if (!coroutineScope.isActive && !isVisibleDialog) changeOfStatus()
     }
-    fun onStop() {
+
+    fun onStop(drop: Boolean = false) {
         coroutineScope.cancel()
+        if (drop) updateStatus.postValue(null)
     }
 
     override fun onCleared() {
         super.onCleared()
         coroutineScope.cancel()
+    }
+
+    private fun changeOfStatus() {
+        coroutineScope = viewModelScope.async {
+            while (true) {
+                if (updateStatus.value == Status.START || updateStatus.value == null) {
+                    updateStatus.postValue(Status.STOP)
+                    println(Status.STOP)
+                    delay(3000)
+                }
+                if (updateStatus.value == Status.STOP) {
+                    updateStatus.postValue(Status.ATTENTION)
+                    println(Status.ATTENTION)
+                    delay(2000)
+                }
+                if (updateStatus.value == Status.ATTENTION) {
+                    updateStatus.postValue(Status.START)
+                    println(Status.START)
+                    delay(3000)
+                }
+            }
+        }
     }
 }

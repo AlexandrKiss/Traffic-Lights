@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setGreenLight()
     }
 
-    fun setClick() {
+    private fun setClick() {
         binding.button.setOnClickListener {
             if (binding.button.text == start) {
                 setDefaultColor()
@@ -53,29 +53,11 @@ class MainActivity : AppCompatActivity() {
                 })
                 viewModel.onStart()
             } else {
-                viewModel.onStop()
+                viewModel.onStop(true)
                 binding.button.text = start
                 setDefaultColor()
             }
         }
-    }
-
-    private fun showDialog(title: String, icon: Int) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-        builder.setMessage("Показать информацию о цвете?")
-        builder.setIcon(icon)
-
-        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-            Toast.makeText(applicationContext,
-                android.R.string.yes, Toast.LENGTH_SHORT).show()
-        }
-
-        builder.setNegativeButton(android.R.string.no) { dialog, which ->
-            Toast.makeText(applicationContext,
-                android.R.string.no, Toast.LENGTH_SHORT).show()
-        }
-        builder.show()
     }
 
     private fun setRed() {
@@ -83,7 +65,8 @@ class MainActivity : AppCompatActivity() {
         binding.rectRed.setBackgroundResource(color)
         binding.rectRedGlow.visibility = View.VISIBLE
         binding.rectRed.setOnClickListener {
-            showDialog("Красный", color)
+            QuestionDialogFragment("Красный", color, viewModel)
+                .show(supportFragmentManager, "QuestionDialogRed")
         }
     }
 
@@ -98,7 +81,8 @@ class MainActivity : AppCompatActivity() {
         binding.rectYellow.setBackgroundResource(color)
         binding.rectYellowGlow.visibility = View.VISIBLE
         binding.rectYellow.setOnClickListener {
-            showDialog("Желтый", color)
+            QuestionDialogFragment("Желтый", color, viewModel)
+                .show(supportFragmentManager, "QuestionDialogYellow")
         }
     }
 
@@ -113,7 +97,8 @@ class MainActivity : AppCompatActivity() {
         binding.rectGreen.setBackgroundResource(color)
         binding.rectGreenGlow.visibility = View.VISIBLE
         binding.rectGreen.setOnClickListener {
-            showDialog("Зеленый", color)
+            QuestionDialogFragment("Зеленый", color, viewModel)
+                .show(supportFragmentManager, "QuestionDialogGreen")
         }
     }
 
