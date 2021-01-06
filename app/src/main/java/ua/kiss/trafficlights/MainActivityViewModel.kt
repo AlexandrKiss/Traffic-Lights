@@ -10,10 +10,10 @@ import ua.kiss.trafficlights.utils.Status
 
 class MainActivityViewModel : ViewModel() {
     val updateStatus: MutableLiveData<Status> by lazy { MutableLiveData<Status>() }
-    private lateinit var corutineScope: Job
+    private lateinit var coroutineScope: Job
 
     fun onStart() {
-        corutineScope = viewModelScope.launch {
+        coroutineScope = viewModelScope.launch {
             while (true) {
                 updateStatus.postValue(Status.STOP)
                 delay(5000)
@@ -25,6 +25,11 @@ class MainActivityViewModel : ViewModel() {
         }
     }
     fun onStop() {
-        corutineScope.cancel()
+        coroutineScope.cancel()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
     }
 }
