@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_info"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        tools:src="@drawable/go_dialog"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/title_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="#434343"
+        tools:text="Зеленый свет светофора"/>
+
+    <TextView
+        android:id="@+id/description_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="false"
+        android:textSize="18sp"
+        tools:text="Свет зеленый впереди?\nСмело ты теперь иди.\nВас машины подождут,\nПешеходы все пройдут."/>
+
+</LinearLayout>

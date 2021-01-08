@@ -1,16 +1,21 @@
 package ua.kiss.trafficlights
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
 import ua.kiss.trafficlights.databinding.ActivityMainBinding
+import ua.kiss.trafficlights.fragments.InterfaceHolder
+import ua.kiss.trafficlights.fragments.OpenDialog
+import ua.kiss.trafficlights.fragments.QuestionDialogFragment
+import ua.kiss.trafficlights.models.greenLight
+import ua.kiss.trafficlights.models.redLight
+import ua.kiss.trafficlights.models.yellowLight
 import ua.kiss.trafficlights.utils.Status
 import ua.kiss.trafficlights.utils.ViewModelFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OpenDialog {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
 
@@ -23,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setViewModel()
         setDefaultColor()
+        InterfaceHolder.set(this)
         setClick()
     }
 
@@ -61,56 +67,51 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRed() {
-        val color = R.drawable.rect_red
-        binding.rectRed.setBackgroundResource(color)
         binding.rectRedGlow.visibility = View.VISIBLE
-        binding.rectRed.setOnClickListener {
-            QuestionDialogFragment("Красный", color, viewModel)
-                .show(supportFragmentManager, "QuestionDialogRed")
+        binding.rectRedGlow.setOnClickListener {
+            showDialog(QuestionDialogFragment(redLight, viewModel),
+                "QuestionDialogRed")
         }
     }
 
     private fun setRedLight() {
-        binding.rectRed.setBackgroundResource(R.drawable.rect_red_light)
-        binding.rectRedGlow.visibility = View.GONE
-        binding.rectRed.setOnClickListener(null)
+        binding.rectRedGlow.visibility = View.INVISIBLE
+        binding.rectRedGlow.setOnClickListener(null)
     }
 
     private fun setYellow() {
-        val color = R.drawable.rect_yellow
-        binding.rectYellow.setBackgroundResource(color)
         binding.rectYellowGlow.visibility = View.VISIBLE
-        binding.rectYellow.setOnClickListener {
-            QuestionDialogFragment("Желтый", color, viewModel)
-                .show(supportFragmentManager, "QuestionDialogYellow")
+        binding.rectYellowGlow.setOnClickListener {
+            showDialog(QuestionDialogFragment(yellowLight, viewModel),
+                "QuestionDialogYellow")
         }
     }
 
     private fun setYellowLight() {
-        binding.rectYellow.setBackgroundResource(R.drawable.rect_yellow_light)
-        binding.rectYellowGlow.visibility = View.GONE
-        binding.rectYellow.setOnClickListener(null)
+        binding.rectYellowGlow.visibility = View.INVISIBLE
+        binding.rectYellowGlow.setOnClickListener(null)
     }
 
     private fun setGreen() {
-        val color = R.drawable.rect_green
-        binding.rectGreen.setBackgroundResource(color)
         binding.rectGreenGlow.visibility = View.VISIBLE
-        binding.rectGreen.setOnClickListener {
-            QuestionDialogFragment("Зеленый", color, viewModel)
-                .show(supportFragmentManager, "QuestionDialogGreen")
+        binding.rectGreenGlow.setOnClickListener {
+            showDialog(QuestionDialogFragment(greenLight, viewModel),
+                "QuestionDialogGreen")
         }
     }
 
     private fun setGreenLight() {
-        binding.rectGreen.setBackgroundResource(R.drawable.rect_green_light)
-        binding.rectGreenGlow.visibility = View.GONE
-        binding.rectGreen.setOnClickListener(null)
+        binding.rectGreenGlow.visibility = View.INVISIBLE
+        binding.rectGreenGlow.setOnClickListener(null)
     }
 
     private fun setViewModel() {
         viewModel = ViewModelProviders
             .of(this, ViewModelFactory())
             .get(MainActivityViewModel::class.java)
+    }
+
+    override fun showDialog(dialog: DialogFragment?, tag: String) {
+        dialog?.show(supportFragmentManager, tag);
     }
 }

@@ -33,17 +33,14 @@ class MainActivityViewModel : ViewModel() {
             while (true) {
                 if (updateStatus.value == Status.START || updateStatus.value == null) {
                     updateStatus.postValue(Status.STOP)
-                    println(Status.STOP)
                     delay(3000)
                 }
                 if (updateStatus.value == Status.STOP) {
                     updateStatus.postValue(Status.ATTENTION)
-                    println(Status.ATTENTION)
                     delay(2000)
                 }
                 if (updateStatus.value == Status.ATTENTION) {
                     updateStatus.postValue(Status.START)
-                    println(Status.START)
                     delay(3000)
                 }
             }
